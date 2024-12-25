@@ -68,18 +68,14 @@ const server = http.createServer((req, res) => {
       });
       req.on("end", () => {
         let readdata = fs.readFileSync("User.json", "utf-8");
-        console.log(readdata);
-
         if (!readdata) {
           fs.writeFileSync("User.json", JSON.stringify([]));
         } else {
           let jsonData = JSON.parse(readdata);
+          console.log(jsonData);
           let users = [...jsonData];
-          console.log(users);
-
           let convertedbody = qs.decode(body);
           users.push(convertedbody);
-          console.log(convertedbody);
           fs.writeFile("User.json", JSON.stringify(users), (err) => {
             if (err) {
               console.log(err);
@@ -104,7 +100,7 @@ const server = http.createServer((req, res) => {
     }
   }
 });
-
-server.listen(3000, () => {
-  console.log("Server listening on port 3000");
+PORT = 3002;
+server.listen(PORT, () => {
+  console.log(`Server listening on port http://localhost:${PORT}`);
 });

@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Data Table</title>
+  <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f1eee9;
+      padding: 2rem;
+      color: #13313c;
+    }
+
+    .table-container {
+      max-width: 800px;
+      margin: auto;
+      overflow-x: auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #13313c;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f54725;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    caption {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #13313c;
+      margin-bottom: 1rem;
+    }
+    h2{
+        margin-top: 2rem;
+        text-align: center;
+        color: #13313c;
+    }
+    h2 a{
+        color: #13313c;
+    }
+  </style>
+</head>
+<body>
+  <div class="table-container">
+    <table id="user-data">
+      <caption>User Data</caption>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+</div>
+<h2><a href="/">Go to home page</a></h2>
+        <script>
+        fetch("http://localhost:3000/user-details")
+            .then((responce) => { return responce.json() })
+            .then((data) => {
+                console.log(data);
+
+                const table = document.querySelector('#user-data');
+                const tableBody = document.querySelector('tbody');
+
+                data.forEach(person => {
+                    const row = document.createElement('tr');
+                    const nameCell = document.createElement('td');
+                    const emailCell = document.createElement('td');
+                    const passCell = document.createElement('td');
+
+                    nameCell.textContent = person.name;
+                    emailCell.textContent = person.email;
+                    passCell.textContent = person.password;
+                    row.appendChild(nameCell);
+                    row.appendChild(emailCell);
+                    row.appendChild(passCell);
+                    tableBody.appendChild(row);
+                });
+            })
+    </script>
+
+
+</body>
+</html>

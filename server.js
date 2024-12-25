@@ -100,7 +100,7 @@ const server = http.createServer((req, res) => {
     }
   }
 });
-PORT = 3002;
+PORT = 3000;
 server.listen(PORT, () => {
   console.log(`Server listening on port http://localhost:${PORT}`);
 });
